@@ -1,4 +1,8 @@
-.Header-bar {
+.header-bar {
   padding: 20px;
-  background-color: white;
+  background-color: #873541;
+  color: white;
+}
+
+.currency-selector {
 }
