@@ -12,27 +12,6 @@ const aud = exchangeRates[0];
 const usd = exchangeRates[1];
 const cny = exchangeRates[2];
 
-// function createProductRow(product) {
-//   const productID = product.id;
-//   const productName = product.name;
-//   const productPrice =
-//     product.price.base !== selectedCurrency
-//       ? convertCurrency(
-//           product.price.base,
-//           selectedCurrency,
-//           product.price.amount
-//         )
-//       : product.price.amount;
-
-//   return (
-//     <tr key={productID}>
-//       <td>{productID}</td>
-//       <td>{productName}</td>
-//       <td>{productPrice}</td>
-//     </tr>
-//   );
-// }
-
 function CallOffCanvas(product) {
   const [show, setShow] = useState(false);
 
@@ -74,8 +53,22 @@ function CallOffCanvas(product) {
             {productPrice} {selectedCurrency}
           </h4>
           <p>Related Products</p>
-          {relatedProducts.map((relatedProduct) => {
-            return <h4>{relatedProduct}</h4>;
+          {relatedProducts.map((relatedProductID) => {
+            const relatedProduct = products.find(
+              (x) => x.id === relatedProductID
+            );
+
+            return (
+              <Table hover className="styled-table">
+                <tbody>
+                  <tr key={productID}>
+                    <td>{relatedProduct.id}</td>
+                    <td>{relatedProduct.name}</td>
+                    <td>{relatedProduct.price.amount}</td>
+                  </tr>
+                </tbody>
+              </Table>
+            );
           })}
         </Offcanvas.Body>
       </Offcanvas>
