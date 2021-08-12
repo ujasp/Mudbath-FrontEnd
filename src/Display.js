@@ -1,8 +1,9 @@
-import { Container } from "react-bootstrap";
+import { Container, Offcanvas } from "react-bootstrap";
 import Table from "react-bootstrap/Table";
 import "./Display.css";
 import * as productData from "./products.json";
 import * as exchangeData from "./exchange_rates.json";
+import React, { useState } from "react";
 
 const selectedCurrency = "USD";
 const products = productData.default;
@@ -11,9 +12,37 @@ const aud = exchangeRates[0];
 const usd = exchangeRates[1];
 const cny = exchangeRates[2];
 
-function createProductRow(product) {
+// function createProductRow(product) {
+//   const productID = product.id;
+//   const productName = product.name;
+//   const productPrice =
+//     product.price.base !== selectedCurrency
+//       ? convertCurrency(
+//           product.price.base,
+//           selectedCurrency,
+//           product.price.amount
+//         )
+//       : product.price.amount;
+
+//   return (
+//     <tr key={productID}>
+//       <td>{productID}</td>
+//       <td>{productName}</td>
+//       <td>{productPrice}</td>
+//     </tr>
+//   );
+// }
+
+function CallOffCanvas(product) {
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
   const productID = product.id;
   const productName = product.name;
+  const productDescription = product.description;
+  const relatedProducts = product.relatedProducts;
   const productPrice =
     product.price.base !== selectedCurrency
       ? convertCurrency(
@@ -24,11 +53,33 @@ function createProductRow(product) {
       : product.price.amount;
 
   return (
-    <tr key={productID}>
-      <td>{productID}</td>
-      <td>{productName}</td>
-      <td>{productPrice}</td>
-    </tr>
+    <Table hover className="styled-table">
+      <tbody>
+        <tr key={productID} onClick={handleShow}>
+          <td>{productID}</td>
+          <td>{productName}</td>
+          <td>{productPrice}</td>
+        </tr>
+      </tbody>
+
+      <Offcanvas show={show} onHide={handleClose} scroll>
+        <Offcanvas.Header closeButton>
+          <Offcanvas.Title>{productName}</Offcanvas.Title>
+        </Offcanvas.Header>
+        <Offcanvas.Body>
+          <p>Product Description</p>
+          <h4>{productDescription}</h4>
+          <p>Price</p>
+          <h4>
+            {productPrice} {selectedCurrency}
+          </h4>
+          <p>Related Products</p>
+          {relatedProducts.map((relatedProduct) => {
+            return <h4>{relatedProduct}</h4>;
+          })}
+        </Offcanvas.Body>
+      </Offcanvas>
+    </Table>
   );
 }
 
@@ -73,10 +124,12 @@ function Display() {
               <th>Price</th>
             </tr>
           </thead>
-          <tbody>{products.map(createProductRow)}</tbody>
+          <tbody>
+            {/* {products.map((product) => createProductRow(product))} */}
+          </tbody>
         </Table>
+        {products.map(CallOffCanvas)}
       </Container>
-      {console.log(convertCurrency("AUD", "USD", 10))}
     </div>
   );
 }

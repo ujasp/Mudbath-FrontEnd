@@ -1,4 +1,6 @@
 .App {
   background-color: #f0d9c3;
   min-height: 100vh;
+  padding-bottom: 20px;
+  height: fit-content;
 }

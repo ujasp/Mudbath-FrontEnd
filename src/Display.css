@@ -7,8 +7,9 @@
 .Display-main {
   background-color: #ffffff;
   margin: 40px auto;
-  min-height: 30vh;
+  /* min-height: 30vh; */
   border-radius: 10px;
+  padding: 20px;
 
   box-shadow: var(--secondary-color) 0px 12px 28px 0px, white 0px 2px 4px 0px,
     white 0px 0px 0px 1px inset;
@@ -21,12 +22,12 @@
 
 .styled-table {
   border-collapse: collapse;
-  margin: 25px 0;
   font-size: 0.9em;
   font-family: sans-serif;
   min-width: 400px;
+  /* min-height: 50px; */
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
-  border-radius: 5px 5px 0 0;
+  border-radius: 5px;
   overflow: hidden;
 }
 
@@ -38,16 +39,13 @@
 .styled-table th,
 .styled-table td {
   padding: 12px 15px;
+  text-align: left;
 }
 
 .styled-table tbody tr {
-  border-bottom: 1px solid #dddddd;
+  /* padding: 20px; */
 }
 
 .styled-table tbody tr:nth-of-type(even) {
   background-color: var(--tertiary-color);
-}
-
-.styled-table tbody tr:last-of-type {
-  border-bottom: 2px solid #f09ca2;
 }
