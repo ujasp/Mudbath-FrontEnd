@@ -10,12 +10,16 @@ function Header() {
           <h1 className="brand-name">Clothing Brand</h1>
         </Col>
         <Col xs={4} md={2}>
-          <Form.Select aria-label="Currency" className="currency-selector">
-            <option value="1" defaultValue>
+          <Form.Select
+            aria-label="Currency"
+            className="currency-selector"
+            id="currencySelector"
+          >
+            <option value="USD" defaultValue>
               USD
             </option>
-            <option value="2">AUD</option>
-            <option value="3">CNY</option>
+            <option value="AUD">AUD</option>
+            <option value="CNY">CNY</option>
           </Form.Select>
         </Col>
       </Row>
